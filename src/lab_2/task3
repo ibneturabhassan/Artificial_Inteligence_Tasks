@@ -1,3 +1,10 @@
+# You should have the following at this point:
+#
+# 1.	Bounding box = (left, right, top, bottom)
+# 2.	Centroid = (cx, cy)
+#
+# You now have to divide the image into four segments
+
 from PIL import Image, ImageDraw
 img = Image.open("image.jpg")
 img = img.convert('1')

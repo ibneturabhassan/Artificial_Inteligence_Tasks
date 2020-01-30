@@ -1,3 +1,6 @@
+# Task 4: Finding black to white transitions
+# In this lab task, you have to find black to white transitions for each of the four segments/ blocks of the signature you made in Task3. That is, you have to calculate the number of white pixels in the neighborhood (use 8-connectivity) of each black pixel in the image.
+
 from PIL import Image, ImageDraw
 
 

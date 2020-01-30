@@ -1,3 +1,6 @@
+# Task 1: Developing a bounding box
+# In this task, you have to locate the signature in the image and develop a bounding box around the signature content only, ignoring the white space around it.
+
 from PIL import Image, ImageDraw
 img = Image.open("image.jpg")
 img = img.convert('1')
