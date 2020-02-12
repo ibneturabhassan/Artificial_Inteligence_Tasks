@@ -86,18 +86,85 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from game import Directions
+    from util import Stack
+    s = Directions.SOUTH
+    w = Directions.WEST
+    e = Directions.EAST
+    n = Directions.NORTH
+
+    visited = [None]  # list of states (each state is a position in this case)
+    stack = Stack()  # contains pairs. each pair's first elem is a list of actions. second elem is state
+    stack.push([[], problem.getStartState()])
+
+
+    while (not stack.isEmpty()):
+        top = stack.pop()  # this is the top of the stack
+        actions = top[0]
+        state = top[1]
+        if (state not in visited):
+            if problem.isGoalState(state):
+                return actions
+            visited.append(state)
+            for child in problem.getSuccessors(state):
+                tempActions = actions[:]
+                tempActions.append(child[1])
+                stack.push([tempActions, child[0]])
+    return None
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    from game import Directions
+    from util import Queue
+    s = Directions.SOUTH
+    w = Directions.WEST
+    e = Directions.EAST
+    n = Directions.NORTH
+
+    visited = [None]
+    queue = Queue()
+    queue.push([[], problem.getStartState()])
+
+    while (not queue.isEmpty()):
+        top = queue.pop()
+        actions = top[0]
+        state = top[1]
+
+        if problem.isGoalState(state):
+            return actions
+
+        visited.append(state)
+
+        for child in problem.getSuccessors(state):  # returns (nextstate, actions, cost)
+            childAction = child[1]
+            childState = child[0]
+            if (childState not in visited):
+                visited.append(childState)
+                tempActions = actions[:]
+                tempActions.append(childAction)
+                queue.push([tempActions, child[0]])
+    return None
+
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    root = problem.getStartState()
+    visited = set()
+    fringe = util.PriorityQueue()
+    fringe.push((root, [], 0), 0)
+    while not fringe.isEmpty():
+        location, path, cost = fringe.pop()
+        if problem.isGoalState(location):
+            return path
+        if location not in visited:
+            visited.add(location)
+            for x, y, z in problem.getSuccessors(location):
+                if x not in visited:
+                    fringe.push((x, path + [y], z + cost), z + cost)
+    return []
 
 def nullHeuristic(state, problem=None):
     """
