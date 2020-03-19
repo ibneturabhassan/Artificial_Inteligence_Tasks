@@ -38,5 +38,4 @@ def minimax(depth, nodeIndex, maximizingPlayer, scoreTree, alpha, beta):
 
 
 scoreTree = [5, 3, 6, 7, 4, 9, 18, 14]
-
 print("The optimal value is :", minimax(0, 0, True, scoreTree, MIN, MAX))
